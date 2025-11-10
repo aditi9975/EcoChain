@@ -84,6 +84,21 @@ app.use(cors({
   credentials: true,
   maxAge: 86400
 }));
+
+// Handle preflight CORS requests globally
+app.options('*', cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://ecochain07.netlify.app',
+    'https://ecochain-j1nj.onrender.com',
+    /\.vercel\.app$/ // regex for all vercel subdomains
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true
+}));
+
 app.use(compressionMiddleware());
 app.use(express.json({ limit: '10mb' })); // Increased limit for image uploads
 app.use(express.urlencoded({ extended: true, limit: '10mb' })); // Increased limit
