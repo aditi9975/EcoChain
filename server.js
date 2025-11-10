@@ -71,7 +71,19 @@ server.on('upgrade', (request, socket, head) => {
 
 // Middleware
 const { corsOptions, securityHeaders } = require('./config/security');
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://ecochain-j1nj.onrender.com',
+    'https://ecochain07.netlify.app',
+    'https://*.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true,
+  maxAge: 86400
+}));
 app.use(compressionMiddleware());
 app.use(express.json({ limit: '10mb' })); // Increased limit for image uploads
 app.use(express.urlencoded({ extended: true, limit: '10mb' })); // Increased limit
