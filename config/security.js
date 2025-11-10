@@ -120,16 +120,17 @@ const rateLimits = {
  * CORS configuration
  */
 const corsOptions = {
-  origin: process.env.ALLOWED_ORIGINS ? 
-    process.env.ALLOWED_ORIGINS.split(',') : 
+  origin: process.env.ALLOWED_ORIGINS ?
+    process.env.ALLOWED_ORIGINS.split(',') :
     [
-      'http://localhost:3000', 
-      'http://localhost:3001', 
+      'http://localhost:3000',
+      'http://localhost:3001',
       'https://ecochain-j1nj.onrender.com',
+      'https://ecochain07.netlify.app',
       'https://*.vercel.app'
     ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   exposedHeaders: ['X-Total-Count'],
   credentials: true,
   maxAge: 86400 // 24 hours
